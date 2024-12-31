@@ -41,19 +41,7 @@
   </script>
 </head>
 
-<div class="nsw-global-alert js-global-alert" role="alert" data-cookie-name="">
-    <div class="nsw-global-alert__wrapper">
-      <div class="nsw-global-alert__content">
-        <div class="nsw-global-alert__title">Interact General Members/Non iSSJ Board Members</div>
-        <p><strong>You do not have access to the iSSJ Case Management Commission Intranet</strong></p>
-        <p>Permission may be granted if you request via an iSSJ Presiding Case-Officer AND requesting access via completing the iSSJ Intranet Access Form provided by <a href="https://avsl2s8s36e.typeform.com/to/Xcm7m2qQ">clicking here.</a></p>
-      </div>
-      <button class="nsw-icon-button js-close-alert" type="button" aria-expanded="true">
-        <span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">close</span>
-        <span class="sr-only">Close message</span>
-      </button>
-    </div>
-  </div>
+
   
 
 <body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2NKBBJZ"
@@ -108,13 +96,24 @@
     
     
 <li>
-      <a href="/">
+    <a href="/portal/">
         <span>Home</span>
       </a>    </li>
+      <li>
+        <a href="/portal/case-search/">
+          <span>Case search</span>
+        </a>    </li>
     <li>
-      <a href="/portal/">
+    <a href="/portal/witness-statement/">
+    <span>Witness Statement</span>
+    </a>    </li>
+    <li>
+      <a href="/portal/my-account/">
         <span>My account</span>
       </a>    </li>
+      <li>
+        <a <button class="logout-btn" id="logout-btn">Log Out</button>
+        </a>    </li>
   </ul>
 </nav>
 
@@ -124,98 +123,19 @@
   </script>
 </body>
 
-<div class="nsw-hero-banner nsw-hero-banner--dark">
-    <div class="nsw-hero-banner__container">
-      <div class="nsw-hero-banner__wrapper">
-        <div class="nsw-hero-banner__content">
-          <h1>iSSJ CMC Intranet</h1>
-          <p class="nsw-intro">Find all your case information, file documents and your profile. Connect online with iSSJ Case Management Commission services quickly.</p>
-        </div>
-        <div class="nsw-hero-banner__links">
-          <div class="nsw-hero-banner__list">
-            <div class="nsw-hero-banner__sub-title">Quick links</div>
-            <ul>
-              <li><a href="#">My account</a></li>
-              <li><a href="#">Case Details</a></li>
-              <li><a href="#">Confidential Document Management</a></li>
-              <li><a href="#">Case Notes</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="nsw-hero-banner__box">
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <hr>
 
-
-  <div class="nsw-container">
+<div class="nsw-container">
     <div class="nsw-layout">
       <main class="nsw-layout__main">
-        <h2>Browse services</h2>
-        <div class="nsw-grid">
-          <div class="nsw-col nsw-col-md-6 nsw-col-lg-4">
-            <div class="nsw-card">
-              <div class="nsw-card__content">
-                <div class="nsw-card__title">
-                  <a href="#">Start a new case</a>
-                </div>
-                <div class="nsw-card__copy">
-                  <p>File forms to commence action online</p>
-                </div>
-                <span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">east</span>
-              </div>
-            </div>
-          </div>
-          <div class="nsw-col nsw-col-md-6 nsw-col-lg-4">
-            <div class="nsw-card">
-              <div class="nsw-card__content">
-                <div class="nsw-card__title">
-                  <a href="/portal/case-search/">Browse through Case Library</a>
-                </div>
-                <div class="nsw-card__copy">
-                  <p>Look and Analyse past and present cases</p>
-                </div>
-                <span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">east</span>
-              </div>
-            </div>
-          </div>
-          <div class="nsw-col nsw-col-md-6 nsw-col-lg-4">
-            <div class="nsw-card">
-              <div class="nsw-card__content">
-                <div class="nsw-card__title">
-                  <a href="#">Generate a Witness Statement</a>
-                </div>
-                <div class="nsw-card__copy">
-                  <p>Complete an approved Witness Statement and have it signed</p>
-                </div>
-                <span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">east</span>
-              </div>
-            </div>
-          </div>
-          <div class="nsw-col nsw-col-md-6 nsw-col-lg-4">
-            <div class="nsw-card">
-              <div class="nsw-card__content">
-                <div class="nsw-card__title">
-                  <a href="#">Access my shared drive</a>
-                </div>
-                <div class="nsw-card__copy">
-                  <p>Read and supervise forms stored on the drive</p>
-                </div>
-                <span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">east</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-
-
-
+        <h1>Welcome, <span id="username"></span></h1>
+        <p>Today is <span id="currentDate"></span></p>
+        <p>Your Role: <span id="userRole"></span></p>
       </main>
     </div>
-  </div>  
+  </div>
+
+
+  
 
 <footer class="nsw-footer">
     <div class="nsw-footer__lower">
@@ -234,5 +154,42 @@
       </div>
     </div>
   </footer>
+
+<script>
+            // Check if the user is logged in
+            if (localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "/auth/"; // Redirect to login page
+        }
+
+        // Display user information and set up page
+        document.addEventListener("DOMContentLoaded", async () => {
+            const username = localStorage.getItem("username");
+            const role = localStorage.getItem("role");
+            const currentDate = new Date().toLocaleDateString('en-US', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+
+            // Display user details
+            document.getElementById("username").textContent = username || 'Guest';
+            document.getElementById("currentDate").textContent = currentDate;
+            document.getElementById("userRole").textContent = role || 'No Role Assigned';
+
+            // Show notice form if the user is a Super-User
+            if (role === "Super-User") {
+                document.getElementById("notice-form-container").style.display = "block";
+            }
+
+            // Handle logout
+            document.getElementById("logout-btn").addEventListener("click", () => {
+                localStorage.removeItem("loggedIn");
+                localStorage.removeItem("username");
+                localStorage.removeItem("role");
+                window.location.href = "/auth/";
+            });
+
+            // Render notices
+            await renderNotices();
+        });
+</script>
 
 </html>

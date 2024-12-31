@@ -18,6 +18,7 @@ function validateLogin() {
     const users = {
         "sample": { role: "blocked", message: "Authorized access to this user has been terminated. Please contact support." },
         "rafael.wang": { role: "Case Manager, Super-User", password: "Rafaelwang2011@", message: "" },
+        "John.Citizen": { role: "Sample-User", password: "Rafaelwang2011@", message: "" },
         "ethan.nguyen": { role: "Presiding Case Officer", password: "Ethanpassword@", message: "Welcome, Ethan Nguyen" },
         "ethan.nguyen": { role: "Super-User", password: "Ethanpassword@", message: "Welcome, Ethan Nguyen" },
         "john.doe": { role: "Interact Member", password: "Johndoepassword@", message: "" }
